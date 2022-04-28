@@ -26,8 +26,10 @@ public class UserService {
         log.info("Inside getUserWithDepartment in UserService ");
         ResponseWithUserDepartment responseWithUserDepartment=new ResponseWithUserDepartment();
         User user=userRepository.getByUserId(userId);
+        log.info("User is {}",user);
         responseWithUserDepartment.setUser(user);
         Department department=restTemplate.getForObject("http://DEPARTMENT-SERVICE/departments/"+user.getDepartmentId(),Department.class);
+        log.info("Department is {}",department);
         responseWithUserDepartment.setDepartment(department);
         log.info("Retreived object is {}",responseWithUserDepartment);
         return responseWithUserDepartment;
